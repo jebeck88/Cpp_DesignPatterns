@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Singleton/.vs/Singleton.slnx
+/Singleton/Singleton/x64/Debug
+/Singleton/x64/Debug

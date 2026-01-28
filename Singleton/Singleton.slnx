@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Singleton/Singleton.vcxproj" Id="0624791f-ad0f-4896-a9d4-66167d56adb3" />
+</Solution>
