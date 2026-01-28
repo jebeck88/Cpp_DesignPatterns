@@ -7,13 +7,15 @@
 
 void producerFunction(std::string name)
 {
+    auto& b = ThreadSafeBuffer::getInstance();
     int count = 0;
     while (count++ < 3)
     {
+        // Create and push an item
         const std::string item = name + "_item_" + std::to_string(count);
-        auto& b = ThreadSafeBuffer::getInstance();
         b.push(name, item);
 
+        // Sleep for 1-6 seconds
         auto sleepSeconds = (std::rand() % 6) + 1;
         std::this_thread::sleep_for(std::chrono::seconds(sleepSeconds));
     }
@@ -21,12 +23,14 @@ void producerFunction(std::string name)
 
 void consumerFunction(std::string name)
 {
+    auto& b = ThreadSafeBuffer::getInstance();
     int count = 0;
     while (count++ < 3)
     {
-        auto& b = ThreadSafeBuffer::getInstance();
+        // Retrieve an item
         auto item = b.pop(name);
 
+        // Sleep for 1-6 seconds
         auto sleepSeconds = (std::rand() % 6) + 1;
         std::this_thread::sleep_for(std::chrono::seconds(sleepSeconds));
     }
@@ -40,14 +44,14 @@ int main()
 
     std::vector<std::thread> workers;
 
-    // Create some producers
+    // Create some producer threads
     for (int i = 0; i < 3; ++i)
     {
         std::string name = "Cook-" + std::to_string(i);
         workers.emplace_back(producerFunction, name);
     }
 
-    // Create some consumers
+    // Create some consumer threads
     for (int i = 0; i < 3; ++i)
     {
         std::string name = "Eater-" + std::to_string(i);
